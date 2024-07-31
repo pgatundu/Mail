@@ -25,6 +25,7 @@ function compose_email() {
   document.querySelector('#compose-subject').value = '';
   document.querySelector('#compose-body').value = '';
 }
+
 function view_email(id) {
   fetch(`/emails/${id}`)
     .then(response => response.json())
@@ -32,20 +33,18 @@ function view_email(id) {
       // Print emails
       console.log(email);
 
-      // Hide the email list and compose view
-
       document.querySelector('#emails-view').style.display = 'none';
       document.querySelector('#compose-view').style.display = 'none';
       document.querySelector('#email-detail-view').style.display = 'block';
 
       document.querySelector('#email-detail-view').innerHTML = `
-        <ul class="list-group">
-          <li class="list-group-item"><strong>From:</strong>${email.sender}</li>
-          <li class="list-group-item"><strong>To:</strong>${email.recipients}</li>
-          <li class="list-group-item"><strong>Subject:</strong>${email.subject}</li>
-          <li class="list-group-item"><strong>Timestamp:</strong>${email.timestamp}</li>
-          <li class="list-group-item">${email.body}</li>           
-        </ul>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>From: </strong>${email.sender}</li>
+        <li class="list-group-item"><strong>To: </strong>${email.recipients}</li>
+        <li class="list-group-item"><strong>Subject: </strong>${email.subject}</li>
+        <li class="list-group-item"><strong>Timestamp: </strong>${email.timestamp}</li>
+        <li class="list-group-item">${(email.body)}</li>           
+      </ul>         
       `;
     });
 }
@@ -72,19 +71,21 @@ function load_mailbox(mailbox) {
 
         // Create div for each email
         const newEmail = document.createElement('div');
+        
+        // Change back ground color
+
         newEmail.className = `list-group-item ${singleEmail.read ? 'read' : 'unread'}`;
+        
         newEmail.innerHTML = `
           <h6>Sender:${singleEmail.sender}</h6>
           <h5>Subject:${singleEmail.subject}</h5>
           <p>${singleEmail.timestamp}</p>       
           `
           ;
-        // Change back ground color
-       // newEmail.className = singleEmail.read ? 'read':'unread';
-
+        
         // Add click event to view email
 
-        newEmail.addEventListener('click', () => view_email(singleEmail.id));
+        newEmail.addEventListener('click', function () { view_email(singleEmail.id)});
         document.querySelector('#emails-view').append(newEmail);
         
       })        
@@ -107,7 +108,7 @@ function send_email(event) {
     body: JSON.stringify({
       recipients: recipients,
       subject: subject,
-      body: body,
+      body: body
     })
   })
     .then(response => response.json())
