@@ -32,6 +32,8 @@ function view_email(id) {
       // Print emails
       console.log(email);
 
+      // Hide the email list and compose view
+
       document.querySelector('#emails-view').style.display = 'none';
       document.querySelector('#compose-view').style.display = 'none';
       document.querySelector('#email-detail-view').style.display = 'block';
@@ -70,7 +72,7 @@ function load_mailbox(mailbox) {
 
         // Create div for each email
         const newEmail = document.createElement('div');
-        newEmail.className = "list-group-item";
+        newEmail.className = `list-group-item ${singleEmail.read ? 'read' : 'unread'}`;
         newEmail.innerHTML = `
           <h6>Sender:${singleEmail.sender}</h6>
           <h5>Subject:${singleEmail.subject}</h5>
@@ -78,13 +80,14 @@ function load_mailbox(mailbox) {
           `
           ;
         // Change back ground color
-        newEmail.className = singleEmail.read ? 'read' : 'unread';
+       // newEmail.className = singleEmail.read ? 'read':'unread';
 
         // Add click event to view email
 
-        newEmail.addEventListener('click', view_email(singleEmail.id));
+        newEmail.addEventListener('click', () => view_email(singleEmail.id));
         document.querySelector('#emails-view').append(newEmail);
-      });
+        
+      })        
     });
 }
 
@@ -104,7 +107,7 @@ function send_email(event) {
     body: JSON.stringify({
       recipients: recipients,
       subject: subject,
-      body: 'body'
+      body: body,
     })
   })
     .then(response => response.json())
