@@ -43,12 +43,20 @@ function view_email(id) {
         <li class="list-group-item"><strong>To: </strong>${email.recipients}</li>
         <li class="list-group-item"><strong>Subject: </strong>${email.subject}</li>
         <li class="list-group-item"><strong>Timestamp: </strong>${email.timestamp}</li>
-        <li class="list-group-item">${(email.body)}</li>           
+        <li class="list-group-item">${email.body}</li>
       </ul>         
-      `;
-    });
+      `
+      // change to read
+      if (!email.read){
+        fetch(`/emails/${email.id}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+              read:true
+          })
+        })
+      }
+  });      
 }
-
 
 function load_mailbox(mailbox) {
 
@@ -71,17 +79,15 @@ function load_mailbox(mailbox) {
 
         // Create div for each email
         const newEmail = document.createElement('div');
-        
-        // Change back ground color
-
-        newEmail.className = `list-group-item ${singleEmail.read ? 'read' : 'unread'}`;
-        
+               
         newEmail.innerHTML = `
           <h6>Sender:${singleEmail.sender}</h6>
           <h5>Subject:${singleEmail.subject}</h5>
           <p>${singleEmail.timestamp}</p>       
           `
           ;
+        //change background color
+        newEmail.className = singleEmail.read ? 'read' : 'unread';
         
         // Add click event to view email
 
