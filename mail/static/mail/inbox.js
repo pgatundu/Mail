@@ -45,15 +45,15 @@ function view_email(id) {
         <li class="list-group-item"><strong>Timestamp: </strong>${email.timestamp}</li>
         <li class="list-group-item">${email.body}</li>
       </ul>         
-      `
+      `;
       // change to read
-      if (!email.read){
+      if (!email.read) {
         fetch(`/emails/${email.id}`, {
           method: 'PUT',
           body: JSON.stringify({
-              read:true
+            read: true
           })
-        })
+        });
       }
 
       //Archive and Unarchive Logic
@@ -61,11 +61,33 @@ function view_email(id) {
       btn_arch.innerHTML = email.archived ? "Unarchive" : "Archive";
       btn_arch.className = email.archived ? "btn btn-success" : "btn btn-danger";
       btn_arch.addEventListener('click', function () {
-        console.log('This btn_arch has been clicked!');
+        fetch(`/emails/${email.id}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+            archived: !email.archived
+          })
+        })
+        .then(() => { load_mailbox('archive')})
       });
-      document.querySelector('#email-detial-view').append(btn_arch);
+      document.querySelector('#email-detail-view').append(btn_arch);
 
-  });      
+      //Reply Logic
+      const btn_reply = document.createElement('button');
+      btn_reply.innerHTML = "Reply"
+      btn_reply.className = "btn btn-primary";
+      btn_reply.addEventListener('click', function () {
+        compose_email();
+
+        document.querySelector('#compose-recipients').value = email.sender;
+        let subject = email.subject;
+        if (subject.split(' ',1)[0] != "Re:"){
+          subject = "Re: " + email.subject;          
+        } 
+        document.querySelector('#compose-subject').value = subject;
+        document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body} `;
+      });    
+      document.querySelector('#email-detail-view').append(btn_reply);        
+    });      
 }
 
 function load_mailbox(mailbox) {
