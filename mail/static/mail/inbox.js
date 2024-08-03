@@ -55,6 +55,16 @@ function view_email(id) {
           })
         })
       }
+
+      //Archive and Unarchive Logic
+      const btn_arch = document.createElement('button');
+      btn_arch.innerHTML = email.archived ? "Unarchive" : "Archive";
+      btn_arch.className = email.archived ? "btn btn-success" : "btn btn-danger";
+      btn_arch.addEventListener('click', function () {
+        console.log('This btn_arch has been clicked!');
+      });
+      document.querySelector('#email-detial-view').append(btn_arch);
+
   });      
 }
 
