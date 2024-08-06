@@ -1,9 +1,98 @@
 textarea {
     min-height: 400px;
 }
-.read{
-    background-color:#A9A9A9;
+
+.read {
+    background-color:#D3D3D3;
 }
-.unread{
+
+.unread {
     background-color: white;
+}
+
+body {
+    background-color: #e9ecef;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Header styling for CS50W Mail logo */
+.header {
+    background-color: #9fc5ed;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.header h1 {
+    color: #f0eaea;
+    font-family: 'Lucida Sans', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 10px 0 0 0;
+}
+
+
+/* User info styling */
+.user-info {
+    font-family: cursive;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Navigation buttons styling */
+.btn-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
+    width: 50%;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+}
+
+.btn-group .btn {
+    margin-right: 15px;
+}
+
+.btn-group .btn-outline-primary {
+    color: #007bff;
+    border: 1px solid #75afee;
+    border-radius: 15px;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Button hover effect */
+.btn-group .btn-outline-primary:hover {
+    background-color: #579be9;
+    color: #f0e8e8;
+}
+
+/* Logout button styling */
+.btn-group .btn-outline-danger {
+
+    color: #dc3545;
+}
+
+.btn-group .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+h2 {
+    color: #116dbd;
+    font-size: 18px;   
+    margin-bottom: 20px;
+    text-align: left;
+    letter-spacing: 4px;
+    line-height: 2;
 }

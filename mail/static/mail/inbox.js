@@ -59,7 +59,7 @@ function view_email(id) {
       //Archive and Unarchive Logic
       const btn_arch = document.createElement('button');
       btn_arch.innerHTML = email.archived ? "Unarchive" : "Archive";
-      btn_arch.className = email.archived ? "btn btn-success" : "btn btn-danger";
+      btn_arch.className = email.archived ? "btn btn-sm btn-outline-success" : "btn btn-sm btn-outline-danger";
       btn_arch.addEventListener('click', function () {
         fetch(`/emails/${email.id}`, {
           method: 'PUT',
@@ -74,7 +74,7 @@ function view_email(id) {
       //Reply Logic
       const btn_reply = document.createElement('button');
       btn_reply.innerHTML = "Reply"
-      btn_reply.className = "btn btn-primary";
+      btn_reply.className = "btn btn-sm btn-outline-primary";
       btn_reply.addEventListener('click', function () {
         compose_email();
 
@@ -113,9 +113,9 @@ function load_mailbox(mailbox) {
         const newEmail = document.createElement('div');
                
         newEmail.innerHTML = `
-          <h6>Sender:${singleEmail.sender}</h6>
-          <h5>Subject:${singleEmail.subject}</h5>
-          <p>${singleEmail.timestamp}</p>       
+          <h5>Sender: ${singleEmail.sender}</5>          
+          <h5>Subject: ${singleEmail.subject} </h5>
+          <p>${singleEmail.timestamp}</p>     
           `
           ;
         //change background color
