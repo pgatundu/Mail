@@ -96,3 +96,57 @@ h2 {
     letter-spacing: 4px;
     line-height: 2;
 }
+.email-item {
+    display: flex;
+    justify-content: space-between;
+    /* Distribute items evenly */
+    align-items: center;
+    padding: 10px;
+    border-bottom: 3px solid #539ee8;
+    /* Add a separator between emails */
+    font-family: Arial, sans-serif;
+    /* Set a consistent font */
+    white-space: nowrap;
+    /* Prevent text wrapping */
+    overflow: hidden;
+    /* Hide overflow content */
+}
+
+.email-sender {
+    flex-basis: 30%;
+    /* Allocate 20% of space to sender */
+    font-weight: bold;
+    /* Bold sender text for emphasis */
+    color: #444;
+    /* Slightly darker color for sender */
+    text-overflow: ellipsis;
+    /* Add ellipsis if text overflows */
+    overflow: hidden;
+    /* Hide overflow content */
+}
+
+.email-subject {
+    flex-grow: 1;
+    /* Allow subject to grow and take up remaining space */
+    padding: 0 20px;
+    /* Add horizontal padding */
+    color: #333;
+    /* Default color for subject */
+    text-overflow: ellipsis;
+    /* Add ellipsis if text overflows */
+    overflow: hidden;
+    /* Hide overflow content */
+}
+
+.email-timestamp {
+    flex-basis: 20%;
+    /* Allocate 20% of space to timestamp */
+    text-align: right;
+    /* Align timestamp to the right */
+    color: #171515;
+    /* Lighter color for timestamp */
+    text-overflow: ellipsis;
+    /* Add ellipsis if text overflows */
+    overflow: hidden;
+    /* Hide overflow content */
+}

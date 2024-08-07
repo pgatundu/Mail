@@ -84,7 +84,8 @@ function view_email(id) {
           subject = "Re: " + email.subject;          
         } 
         document.querySelector('#compose-subject').value = subject;
-        document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body} `;
+        document.querySelector('#compose-body').value =
+          `\n\n--------------------\nOn ${email.timestamp}, ${email.sender} wrote:\n${email.body}`;
       });    
       document.querySelector('#email-detail-view').append(btn_reply);        
     });      
@@ -111,13 +112,16 @@ function load_mailbox(mailbox) {
 
         // Create div for each email
         const newEmail = document.createElement('div');
-               
+                
         newEmail.innerHTML = `
-          <h5>Sender: ${singleEmail.sender}</5>          
-          <h5>Subject: ${singleEmail.subject} </h5>
-          <p>${singleEmail.timestamp}</p>     
-          `
-          ;
+        <div class="email-item">
+          <span class="email-sender">${singleEmail.sender}</span>
+          <span class="email-subject">${singleEmail.subject}</span>
+          <span class="email-timestamp">${singleEmail.timestamp}</span>
+        </div>    
+
+          `;
+        document.body.appendChild(newEmail);
         //change background color
         newEmail.className = singleEmail.read ? 'read' : 'unread';
         
